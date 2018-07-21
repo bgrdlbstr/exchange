@@ -12,7 +12,7 @@ public class FxRateEvent {
     }
 
     public void setFxRate(final FxRate fxRate) {
-        this.fxRate = checkNotNull(fxRate);
+        this.fxRate = new FxRate(checkNotNull(fxRate));
     }
 
     public void clear() {
