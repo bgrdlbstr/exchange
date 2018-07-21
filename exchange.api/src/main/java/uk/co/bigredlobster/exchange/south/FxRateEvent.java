@@ -7,6 +7,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class FxRateEvent {
     private FxRate fxRate;
 
+    public FxRate getFxRate() {
+        return new FxRate(fxRate);
+    }
+
     public void setFxRate(final FxRate fxRate) {
         this.fxRate = checkNotNull(fxRate);
     }

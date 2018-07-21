@@ -1,6 +1,8 @@
 package uk.co.bigredobster.domain;
 
+import uk.co.bigredobster.microtypes.PrimaryCurrency;
 import uk.co.bigredobster.microtypes.Rate;
+import uk.co.bigredobster.microtypes.SecondaryCurrency;
 
 import java.util.Objects;
 
@@ -13,6 +15,14 @@ public class FxRate {
     public FxRate(final CurrencyPair currencyPair, final Rate rate) {
         this.currencyPair = checkNotNull(currencyPair);
         this.rate = checkNotNull(rate);
+    }
+
+    public FxRate(FxRate copy) {
+        this.currencyPair = new CurrencyPair(
+                new PrimaryCurrency(copy.currencyPair.getPrimaryCurrency().value),
+                new SecondaryCurrency(copy.currencyPair.getSecondaryCurrency().value)
+        );
+        this.rate = new Rate(copy.rate.value);
     }
 
     public CurrencyPair getCurrencyPair() {
