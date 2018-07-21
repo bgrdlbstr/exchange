@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: uk.co.bigredlobster.exchange.ExchangeApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.458 s - in uk.co.bigredlobster.exchange.ExchangeApplicationTests

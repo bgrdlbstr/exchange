@@ -1,0 +1,8 @@
+uk\co\bigredobster\domain\CurrencyPair.class
+uk\co\bigredobster\domain\FxRate.class
+uk\co\bigredobster\microtypes\base\MicroType.class
+uk\co\bigredobster\microtypes\PrimaryCurrency.class
+uk\co\bigredobster\microtypes\base\BooleanMicroType.class
+uk\co\bigredobster\microtypes\base\StringMicroType.class
+uk\co\bigredobster\microtypes\base\IntegerMicroType.class
+uk\co\bigredobster\microtypes\SecondaryCurrency.class
