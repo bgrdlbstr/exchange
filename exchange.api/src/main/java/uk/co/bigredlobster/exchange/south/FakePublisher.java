@@ -13,10 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class FakePublisher {
-    private final Cache cache;
+    private final FxCache cache;
     private final AtomicInteger counter;
 
-    public FakePublisher(Cache cache) {
+    public FakePublisher(FxCache cache) {
         this.cache = checkNotNull(cache);
         counter = new AtomicInteger(0);
     }

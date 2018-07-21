@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Publishers {
 
-    private final Cache cache;
+    private final FxCache cache;
 
     @Autowired
-    public Publishers(Cache cache) {
+    public Publishers(FxCache cache) {
         this.cache = cache;
     }
 
