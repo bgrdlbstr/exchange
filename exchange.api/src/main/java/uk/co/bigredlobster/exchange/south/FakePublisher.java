@@ -1,34 +1,22 @@
 package uk.co.bigredlobster.exchange.south;
 
 import uk.co.bigredlobster.exchange.equator.Cache;
-import uk.co.bigredobster.domain.CurrencyPair;
-import uk.co.bigredobster.domain.FxRate;
 import uk.co.bigredobster.microtypes.PrimaryCurrency;
 import uk.co.bigredobster.microtypes.Rate;
 import uk.co.bigredobster.microtypes.SecondaryCurrency;
 
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class FakePublisher {
+class FakePublisher {
     private final Cache cache;
-    private final AtomicInteger counter;
 
-    public FakePublisher(Cache cache) {
+    FakePublisher(Cache cache) {
         this.cache = checkNotNull(cache);
-        counter = new AtomicInteger(0);
     }
 
-    public void startPublishing() {
-        final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
-        scheduledThreadPoolExecutor.scheduleAtFixedRate(
-                () -> cache.add(new FxRate(new CurrencyPair(new PrimaryCurrency("EUR"), new SecondaryCurrency("USD")), new Rate("1.10" + counter.incrementAndGet()))),
-                1000,
-                100,
-                TimeUnit.MILLISECONDS
-        );
+    void startPublishing() {
+        new RateGenerator(cache, new PrimaryCurrency("EUR"), new SecondaryCurrency("USD"), new Rate("1.1")).start();
+        new RateGenerator(cache, new PrimaryCurrency("GBP"), new SecondaryCurrency("USD"), new Rate("1.3")).start();
+        new RateGenerator(cache, new PrimaryCurrency("JPY"), new SecondaryCurrency("USD"), new Rate("99.1")).start();
     }
 }
