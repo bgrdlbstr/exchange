@@ -1,4 +1,4 @@
-package uk.co.bigredlobster.exchange.south;
+package uk.co.bigredlobster.exchange.south.theStreet;
 
 import com.lmax.disruptor.EventFactory;
 

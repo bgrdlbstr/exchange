@@ -1,29 +1,29 @@
-package uk.co.bigredlobster.exchange.south;
+package uk.co.bigredlobster.exchange.equator;
 
+import com.lmax.disruptor.EventFactory;
+import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
-import uk.co.bigredobster.domain.CurrencyPair;
+import org.springframework.stereotype.Component;
+import uk.co.bigredlobster.exchange.south.theStreet.FxRateEvent;
 import uk.co.bigredobster.domain.FxRate;
-import uk.co.bigredobster.microtypes.PrimaryCurrency;
-import uk.co.bigredobster.microtypes.Rate;
-import uk.co.bigredobster.microtypes.SecondaryCurrency;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+@Component
 public class Cache {
 
     private final Disruptor<FxRateEvent> disruptor;
     private RingBuffer<FxRateEvent> ringBuffer;
 
-    public Cache() {
+    public Cache(FxRateEventHandler fxRateEventHandler) {
         Executor executor = Executors.newCachedThreadPool();
         int bufferSize = 1024;
 
         disruptor = new Disruptor<>(FxRateEvent::new, bufferSize, executor);
-        disruptor.handleEventsWith(new FxRateEventHandler()).then(new ClearingEventHandler());
+        disruptor.handleEventsWith(fxRateEventHandler).then(new ClearingEventHandler());
     }
 
     public void add(FxRate fxRate) {

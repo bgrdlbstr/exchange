@@ -55,5 +55,4 @@ public class FxRate {
                 ", rate=" + rate +
                 '}';
     }
-
 }

@@ -4,7 +4,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
-import uk.co.bigredlobster.exchange.ApiCurrencyPair;
 import uk.co.bigredobster.domain.CurrencyPair;
 import uk.co.bigredobster.domain.FxRate;
 import uk.co.bigredobster.microtypes.PrimaryCurrency;

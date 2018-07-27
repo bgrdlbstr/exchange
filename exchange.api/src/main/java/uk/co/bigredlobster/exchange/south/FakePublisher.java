@@ -1,5 +1,6 @@
 package uk.co.bigredlobster.exchange.south;
 
+import uk.co.bigredlobster.exchange.equator.Cache;
 import uk.co.bigredobster.domain.CurrencyPair;
 import uk.co.bigredobster.domain.FxRate;
 import uk.co.bigredobster.microtypes.PrimaryCurrency;
@@ -25,8 +26,8 @@ public class FakePublisher {
         final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
         scheduledThreadPoolExecutor.scheduleAtFixedRate(
                 () -> cache.add(new FxRate(new CurrencyPair(new PrimaryCurrency("EUR"), new SecondaryCurrency("USD")), new Rate("1.10" + counter.incrementAndGet()))),
-                10,
-                10,
+                1000,
+                100,
                 TimeUnit.MILLISECONDS
         );
     }

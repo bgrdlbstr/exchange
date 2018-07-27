@@ -1,4 +1,4 @@
-package uk.co.bigredlobster.exchange;
+package uk.co.bigredlobster.exchange.north;
 
 import java.util.Objects;
 
