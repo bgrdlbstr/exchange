@@ -1,11 +1,11 @@
 package uk.co.bigredlobster.exchange.south;
 
 import uk.co.bigredlobster.exchange.equator.Cache;
+import uk.co.bigredobster.domain.Broker;
+import uk.co.bigredobster.domain.BrokerFxRate;
 import uk.co.bigredobster.domain.CurrencyPair;
 import uk.co.bigredobster.domain.FxRate;
-import uk.co.bigredobster.microtypes.PrimaryCurrency;
-import uk.co.bigredobster.microtypes.Rate;
-import uk.co.bigredobster.microtypes.SecondaryCurrency;
+import uk.co.bigredobster.microtypes.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,6 +19,7 @@ class RateGenerator {
     private final SecondaryCurrency secondaryCurrency;
     private final ScheduledExecutorService executor;
     private Rate lastRate;
+    private Broker broker = new Broker(new BrokerName("Barclays"), new BrokerCode("BARC"));
 
     RateGenerator(final Cache cache, final PrimaryCurrency primaryCurrency, final SecondaryCurrency secondaryCurrency, final Rate seed) {
         this.cache = cache;
@@ -42,7 +43,7 @@ class RateGenerator {
                 executor.execute(
                         () -> {
                             final Rate nextRate = getNextRate();
-                            cache.add(new FxRate(new CurrencyPair(primaryCurrency, secondaryCurrency), nextRate));
+                            cache.add(new BrokerFxRate(broker, new FxRate(new CurrencyPair(primaryCurrency, secondaryCurrency), nextRate)));
                             this.lastRate = nextRate;
                         }
                 );

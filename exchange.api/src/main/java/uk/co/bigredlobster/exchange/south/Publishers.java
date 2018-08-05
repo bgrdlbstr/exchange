@@ -21,6 +21,5 @@ public class Publishers {
         FakePublisher fakePublisher = new FakePublisher(cache);
         fakePublisher.startPublishing();
         return true;
-
     }
 }

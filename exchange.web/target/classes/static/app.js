@@ -20,14 +20,17 @@ function connect() {
         console.log('Connected: ' + frame);
         stompDataClient.subscribe('/topic/fxrates', function (greeting) {
             var json = JSON.parse(greeting.body);
-            var primaryCurrency = json.currencyPair.primaryCurrency.value;
-            var secondaryCurrency = json.currencyPair.secondaryCurrency.value;
-            var fxRate = json.rate.value;
-            showGreeting("You asked for " + primaryCurrency + " / " + secondaryCurrency + " and got fxRate " + fxRate);
+            var primaryCurrency = json.fxRate.currencyPair.primaryCurrency.value;
+            var secondaryCurrency = json.fxRate.currencyPair.secondaryCurrency.value;
+            var fxRate = json.fxRate.rate.value;
+            var brokerName = json.broker.brokerName.value;
+            var brokerCode = json.broker.brokerCode.value;
+            showGreeting(brokerCode + "(" + brokerName + ") " + primaryCurrency + "/" + secondaryCurrency + " " + fxRate);
         });
     });
 }
 
+//{"broker":{"brokerName":{"value":"Barclays"},"brokerCode":{"value":"BARC"}},"fxRate":{"currencyPair":{"primaryCurrency":{"value":"JPY"},"secondaryCurrency":{"value":"USD"}},"rate":{"value":99.120581}}}
 function disconnect() {
     if (stompDataClient !== null) {
         stompDataClient.disconnect();
