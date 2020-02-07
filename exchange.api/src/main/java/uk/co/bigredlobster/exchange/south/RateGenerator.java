@@ -55,9 +55,9 @@ class RateGenerator {
 
     private Rate getNextRate() {
         if (Math.random() >= 0.5)
-            return new Rate(lastRate.value.add(new BigDecimal(Math.random() / 100)).setScale(6, RoundingMode.HALF_UP));
+            return new Rate(lastRate.value.add(BigDecimal.valueOf(Math.random() / 100)).setScale(6, RoundingMode.HALF_UP));
         else
-            return new Rate(lastRate.value.subtract(new BigDecimal(Math.random() / 100)).setScale(6, RoundingMode.HALF_UP));
+            return new Rate(lastRate.value.subtract(BigDecimal.valueOf(Math.random() / 100)).setScale(6, RoundingMode.HALF_UP));
     }
 
     private long getDelayMs() {
